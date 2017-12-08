@@ -6,20 +6,27 @@
 /*   By: mjoubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 11:05:11 by mjoubert          #+#    #+#             */
-/*   Updated: 2017/11/27 17:39:46 by areid            ###   ########.fr       */
+/*   Updated: 2017/11/29 16:21:51 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/libft.h"
 #include "fillit.h"
 
 int		ft_test2(char *str)
 {
+	int	i;
+
+	i = 0;
 	if (!*str)
 		return (0);
-	else if (*str == '#' && (*(str + 1) == '#' || *(str - 1) == '#' \
-				|| *(str + 5) == '#' || *(str - 5) == '#'))
-		return (1 + (ft_test2(str + 1)));
-	else
-		return (ft_test2(str + 1));
+	if (*str == '#' && *(str + 1) == '#')
+		i++;
+	if (*str == '#' && *(str + 5) == '#')
+		i++;
+	if (*str == '#' && *(str - 1) == '#')
+		i++;
+	if (*str == '#' && *(str - 5) == '#')
+		i++;
+	return (i + ft_test2(str + 1));
 }

@@ -6,13 +6,12 @@
 /*   By: areid <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 19:55:52 by areid             #+#    #+#             */
-/*   Updated: 2017/11/27 20:47:06 by areid            ###   ########.fr       */
+/*   Updated: 2017/11/29 16:19:17 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/libft.h"
 #include "fillit.h"
-#include <stdio.h>
 
 char	**ft_board_calc(int board_size)
 {

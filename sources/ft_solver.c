@@ -6,15 +6,14 @@
 /*   By: areid <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:38:34 by areid             #+#    #+#             */
-/*   Updated: 2017/11/27 23:32:03 by areid            ###   ########.fr       */
+/*   Updated: 2017/11/29 16:20:53 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/libft.h"
 #include "fillit.h"
-#include <stdio.h>
 
-void	ft_remove(char **board, l_res *alst)
+void	ft_remove(char **board, t_res *alst)
 {
 	int x;
 	int y;
@@ -34,28 +33,26 @@ void	ft_remove(char **board, l_res *alst)
 	}
 }
 
-int		ft_notfit(int x, int y, char **board, l_res *alst)
+int		ft_notfit(int x, int y, char **board, t_res *alst)
 {
 	int b;
 	int i;
 	int j;
 	int add;
 
-	b = x;
+	b = x - 1;
 	i = 0;
 	j = 0;
 	add = 0;
 	while (board[y] && alst->res_dom[i])
 	{
-		while (board[y][b] && alst->res_dom[i][j])
+		while (board[y][++b] && alst->res_dom[i][j])
 		{
-			if (alst->res_dom[i][j] == alst->letter && board[y][b] != '.')
+			if (alst->res_dom[i][j++] == alst->letter && board[y][b] != '.')
 				return (1);
-			b++;
-			j++;
 			add++;
 		}
-		b = x;
+		b = x - 1;
 		j = 0;
 		y++;
 		i++;
@@ -65,7 +62,7 @@ int		ft_notfit(int x, int y, char **board, l_res *alst)
 	return (0);
 }
 
-int		ft_place(int x, int y, char **board, l_res *alst)
+int		ft_place(int x, int y, char **board, t_res *alst)
 {
 	int b;
 	int i;
@@ -93,14 +90,13 @@ int		ft_place(int x, int y, char **board, l_res *alst)
 	return (1);
 }
 
-int		ft_solver(char **board, l_res *alst)
+int		ft_solver(char **board, t_res *alst)
 {
 	int x;
 	int y;
 
 	x = 0;
 	y = 0;
-
 	if (!alst)
 		return (1);
 	while (board[y])

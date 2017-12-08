@@ -6,16 +6,16 @@
 /*   By: mjoubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 10:54:18 by mjoubert          #+#    #+#             */
-/*   Updated: 2017/11/27 23:37:09 by areid            ###   ########.fr       */
+/*   Updated: 2017/11/30 10:48:51 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/libft.h"
 #include "fillit.h"
 
-void	ft_error()
+int	ft_error(void)
 {
 	ft_putstr("error");
 	ft_putchar(10);
-	exit(EXIT_FAILURE);
+	exit(-1);
 }

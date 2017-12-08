@@ -6,12 +6,12 @@
 /*   By: mjoubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 11:01:52 by mjoubert          #+#    #+#             */
-/*   Updated: 2017/11/26 11:12:21 by mjoubert         ###   ########.fr       */
+/*   Updated: 2017/11/29 16:21:20 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft.h"
+#include "../libft/libft.h"
 
 size_t		ft_test1(char *str)
 {

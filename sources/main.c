@@ -6,13 +6,13 @@
 /*   By: mjoubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:41:27 by mjoubert          #+#    #+#             */
-/*   Updated: 2017/11/27 17:44:11 by areid            ###   ########.fr       */
+/*   Updated: 2017/11/29 16:22:05 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "fillit.h"
-#include "libft.h"
+#include "../libft/libft.h"
 
 int		main(int argc, char **argv)
 {
@@ -21,5 +21,8 @@ int		main(int argc, char **argv)
 		ft_read(argv[1]);
 	}
 	else
-		return (0);
+	{
+		ft_putstr("usage : ./fillit source_file\n");
+	}
+	return (0);
 }

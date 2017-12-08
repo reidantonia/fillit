@@ -6,29 +6,35 @@
 /*   By: mjoubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 10:59:14 by mjoubert          #+#    #+#             */
-/*   Updated: 2017/11/27 22:42:02 by areid            ###   ########.fr       */
+/*   Updated: 2017/12/04 15:48:38 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft/libft.h"
 #include "fillit.h"
 
-l_res	*ft_stock(char **res, l_res **alst, char let, t_struct lims)
+static t_res	*ft_cut(char **res, char let, t_struct lims, t_res *domino)
 {
-	l_res	*domino;
-	l_res	*ptr;
+	domino->res_dom = res;
+	domino->letter = let;
+	domino->width = (lims.x_max - lims.x_min) + 1;
+	domino->height = (lims.y_max - lims.y_min) + 1;
+	domino->next = NULL;
+	domino->previous = NULL;
+	return (domino);
+}
+
+t_res			*ft_stock(char **res, t_res **alst, char let, t_struct lims)
+{
+	t_res	*domino;
+	t_res	*ptr;
 
 	ptr = *alst;
-	if (!(domino = (l_res*)malloc(sizeof(*domino))))
+	if (!(domino = (t_res*)malloc(sizeof(*domino))))
 		ft_error();
 	if (*alst == NULL)
 	{
-		domino->res_dom = res;
-		domino->letter = let;
-		domino->width = (lims.x_max - lims.x_min) + 1;
-		domino->height = (lims.y_max - lims.y_min) + 1;
-		domino->next = NULL;
-		domino->previous = NULL;
+		domino = ft_cut(res, let, lims, domino);
 		*alst = domino;
 		return (*alst);
 	}

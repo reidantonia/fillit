@@ -6,12 +6,12 @@
 /*   By: mjoubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 11:16:30 by mjoubert          #+#    #+#             */
-/*   Updated: 2017/11/27 23:33:10 by areid            ###   ########.fr       */
+/*   Updated: 2017/11/30 11:02:11 by mjoubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
+#include "../libft/libft.h"
 
 static t_struct		ft_lims(char *str)
 {
@@ -71,7 +71,7 @@ static char			**ft_tet_full(char *str)
 	return (tab);
 }
 
-static l_res		*ft_tetris(char *str, l_res *alst)
+static t_res		*ft_tetris(char *str, t_res *alst)
 {
 	static char		let = 'A';
 	char			**res;
@@ -79,7 +79,7 @@ static l_res		*ft_tetris(char *str, l_res *alst)
 	t_struct		hi;
 
 	str[BUF_SIZE] = '\0';
-	if (ft_test1(str) == 0 || ft_test2(str) != 4)
+	if (ft_test1(str) == 0 || ft_test2(str) < 6)
 		ft_error();
 	tetris = ft_tet_full(str);
 	hi = ft_lims(str);
@@ -89,58 +89,28 @@ static l_res		*ft_tetris(char *str, l_res *alst)
 	return (alst);
 }
 
-void	ft_print_board(char ** board)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (board[y])
-	{
-		ft_putstr(board[y]);
-		ft_putstr("\n");
-		y++;
-	}
-}
-
-l_res				*ft_read(char *av)
+void				ft_read(char *av)
 {
 	int			fd;
 	int			ret;
 	size_t		i;
 	char		str[BUF_SIZE + 1];
-	l_res		*alst;
-	char **board;
-	
-	int qty;
-	int x;
-	int min_sq_req;
+	t_res		*alst;
 
 	alst = NULL;
 	i = 0;
 	ret = 0;
-	x = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		ft_error();
 	while ((ret = read(fd, str, BUF_SIZE)))
 	{
+		if (str[0] == '\n')
+			ft_error();
 		alst = ft_tetris(str, alst);
 		i = i + ret;
 	}
-	qty = (i + 1) / 21;
-	min_sq_req = qty * 4;
-	while (x * x < min_sq_req)
-		x++;
-	board = ft_board_calc(x);
-	while (!(ft_solver(board, alst)))
-	{
-		x++;
-		board = ft_board_calc(x);
-	}
-	ft_print_map(board);
-	if ((i % 21) != 20)
-		ft_error();
-	return (alst);
+	ft_print_map(ft_min_sq(i, alst));
+	free(alst);
+	alst = NULL;
 }
